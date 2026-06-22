@@ -35,7 +35,7 @@ Added many voice presets, reworked sv_broadcastdata. Fixed many bugs introduced 
 
 `eightbit.EFF_BITCRUSH` Distortion, high pass low pass filter, voice of the elite squad of cleaners.
 
-`eightbit.EFF_COMB`       Applies a combine filter, ring modulation, and pitch shifting. Produces a metallic, resonant, low-pitched voice with a ìsubharmonicî character.
+`eightbit.EFF_COMB`       Applies a combine filter, ring modulation, and pitch shifting. Produces a metallic, resonant, low-pitched voice with a ‚Äúsubharmonic‚Äù character.
 
 `eightbit.EFF_DARTHVADER` Lowers the pitch by averaging adjacent samples and adds a heavy low?frequency rumble. Creates a deep, menacing voice reminiscent of a certain Sith Lord.
 
@@ -47,19 +47,19 @@ Added many voice presets, reworked sv_broadcastdata. Fixed many bugs introduced 
 
 `eightbit.EFF_OVERDRIVE`  Applies aggressive soft?clipping (tanh) with high pre?gain and a short, dirty delay. Gives the voice a thick, saturated, tube?amp overdrive character.
 
-`eightbit.EFF_DISTORTION` Heavy, hard?clipping distortion with high gain. Creates a raw, ìfuzzyî sound similar to a fuzz pedal.
+`eightbit.EFF_DISTORTION` Heavy, hard?clipping distortion with high gain. Creates a raw, ‚Äúfuzzy‚Äù sound similar to a fuzz pedal.
 
-`eightbit.EFF_TELEPHONE`  Band?pass filters (500?Hz ñ 3.2?kHz), moderate bit?crushing, and occasional signal glitches. Mimics the narrow bandwidth and artifacts of a traditional phone line.
+`eightbit.EFF_TELEPHONE`  Band?pass filters (500?Hz ‚Äì 3.2?kHz), moderate bit?crushing, and occasional signal glitches. Mimics the narrow bandwidth and artifacts of a traditional phone line.
 
 `eightbit.EFF_MEGAPHONE`  Aggressive band?pass filtering, a short metallic slapback, and hard limiting. Produces the strained, hollow sound of a public address megaphone.
 
-`eightbit.EFF_CHIPMUNK`   Speeds up the audio by skipping every other sample, raising pitch roughly one octave. Creates the familiar ìchipmunkî high?pitched voice.
+`eightbit.EFF_CHIPMUNK`   Speeds up the audio by skipping every other sample, raising pitch roughly one octave. Creates the familiar ‚Äúchipmunk‚Äù high?pitched voice.
 
-`eightbit.EFF_SLOWMOTION` Slows down the audio by repeating each sample, lowering pitch by about one octave. Gives a deep, stretched, ìslow?motionî effect.
+`eightbit.EFF_SLOWMOTION` Slows down the audio by repeating each sample, lowering pitch by about one octave. Gives a deep, stretched, ‚Äúslow?motion‚Äù effect.
 
 `Eightbit.EFF_COMBO` is a hybrid of ring modulation, soft limiting, comb filtering, and bandpass filtering. Creates a "Metrocop" effect.
 
-# Edited by "RG Studio" and "Quantum Ocean" projects
+# Forked from "RG Studio" and "Quantum Ocean" projects
 
-### Original module - https://github.com/Meachamp/gm_8bit
+### Original module - https://github.com/fandax76/gm_8bit3
 ### The module taken as a base - https://github.com/Devinsideer/gm_8bit2
