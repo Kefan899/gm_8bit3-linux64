@@ -43,7 +43,13 @@ jobs:
     - name: Build Linux x86_64
       run: |
         cd projects/linux/gmake
-        mapfile -t configs < <(sed -n 's/^ifneq ($(config),\(.*\))/\1/p' Makefile | sort -u)
+        make help | tee make-help.txt
+        mapfile -t configs < <(awk '
+          BEGIN { in_configs = 0 }
+          /^CONFIGURATIONS:/ { in_configs = 1; next }
+          /^TARGETS:/ { in_configs = 0 }
+          in_configs && $1 != "" { print $1 }
+        ' make-help.txt | sort -u)
         printf 'Generated make configs:\n'
         printf '  %s\n' "${configs[@]}"
         config="$(printf '%s\n' "${configs[@]}" | grep -Ei 'releasewithsymbols.*(x86_64|x64|linux64|64)' | head -n 1 || true)"
