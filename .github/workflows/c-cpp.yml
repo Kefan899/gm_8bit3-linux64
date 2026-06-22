@@ -43,23 +43,30 @@ jobs:
     - name: Build Linux x86_64
       run: |
         cd projects/linux/gmake
-        make config=releasewithsymbols_x86_64
+        make config=releasewithsymbols
     - name: Verify Linux x86_64 module
       run: |
-        test -f projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
-        file projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        MODULE_PATH="$(find projects/linux/gmake -name gmsv_eightbit_linux64.dll -type f | head -n 1)"
+        mkdir -p artifacts
+        if [ -z "$MODULE_PATH" ]; then
+          find projects/linux/gmake -type f -name 'gmsv_eightbit*' -print
+          exit 1
+        fi
+        file "$MODULE_PATH" | tee artifacts/module-file.txt
+        grep -q "ELF 64-bit" artifacts/module-file.txt
+        cp "$MODULE_PATH" artifacts/gmsv_eightbit_linux64.dll
     - name: Upload Linux x86_64 artifact
       uses: actions/upload-artifact@v4
       with:
         name: gmsv_eightbit_linux64.dll
-        path: projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        path: artifacts/gmsv_eightbit_linux64.dll
         if-no-files-found: error
         retention-days: 90
     - name: Attach Linux x86_64 module to release
       if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v2
       with:
-        files: projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        files: artifacts/gmsv_eightbit_linux64.dll
 
   build-windows:
     runs-on: windows-2019
