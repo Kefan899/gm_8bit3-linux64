@@ -39,27 +39,27 @@ jobs:
         test -x ./premake5
     - name: Generate Makefiles
       run: |
-        ./premake5 --gmcommon=garrysmod_common gmake2
+        ./premake5 --gmcommon=garrysmod_common gmake
     - name: Build Linux x86_64
       run: |
-        cd projects/linux/gmake2
+        cd projects/linux/gmake
         make config=releasewithsymbols_x86_64
     - name: Verify Linux x86_64 module
       run: |
-        test -f projects/linux/gmake2/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
-        file projects/linux/gmake2/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        test -f projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        file projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
     - name: Upload Linux x86_64 artifact
       uses: actions/upload-artifact@v4
       with:
         name: gmsv_eightbit_linux64.dll
-        path: projects/linux/gmake2/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        path: projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
         if-no-files-found: error
         retention-days: 90
     - name: Attach Linux x86_64 module to release
       if: startsWith(github.ref, 'refs/tags/v')
       uses: softprops/action-gh-release@v2
       with:
-        files: projects/linux/gmake2/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
+        files: projects/linux/gmake/x86_64/ReleaseWithSymbols/gmsv_eightbit_linux64.dll
 
   build-windows:
     runs-on: windows-2019
