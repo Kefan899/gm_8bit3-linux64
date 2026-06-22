@@ -26,14 +26,15 @@ jobs:
     - name: Install dependencies
       run: |
         sudo apt-get update
-        sudo apt-get install -y build-essential libopus-dev
+        sudo apt-get install -y build-essential libopus-dev unzip
     - name: Install Premake
       run: |
-        curl --fail --location --retry 5 --retry-all-errors https://github.com/premake/premake-core/releases/download/v5.0.0-beta7/premake-5.0.0-beta7-linux.tar.gz -o premake.tar.gz
-        mkdir premake-bin
-        tar -xzf premake.tar.gz -C premake-bin
-        find premake-bin -name premake5 -type f -print
-        cp "$(find premake-bin -name premake5 -type f | head -n 1)" ./premake5
+        curl --fail --location --retry 5 --retry-all-errors https://github.com/premake/premake-core/releases/download/v5.0.0-beta7/premake-5.0.0-beta7-src.zip -o premake-src.zip
+        unzip -q premake-src.zip -d premake-src
+        PREMAKE_DIR="$(dirname "$(find premake-src -name Bootstrap.mak -type f | head -n 1)")"
+        make -C "$PREMAKE_DIR" -f Bootstrap.mak linux
+        PREMAKE_BIN="$(find "$PREMAKE_DIR/bin" -name premake5 -type f | head -n 1)"
+        cp "$PREMAKE_BIN" ./premake5
         chmod +x ./premake5
         test -x ./premake5
     - name: Generate Makefiles
