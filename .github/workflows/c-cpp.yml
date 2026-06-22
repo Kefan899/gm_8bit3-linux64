@@ -29,9 +29,12 @@ jobs:
         sudo apt-get install -y build-essential libopus-dev
     - name: Install Premake
       run: |
-        curl -L https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-linux.tar.gz -o premake.tar.gz
-        tar -xf premake.tar.gz premake5
+        curl --fail --location --retry 5 --retry-all-errors https://github.com/premake/premake-core/releases/download/v5.0.0-beta2/premake-5.0.0-beta2-linux.tar.gz -o premake.tar.gz
+        file premake.tar.gz
+        tar -tzf premake.tar.gz
+        tar -xzf premake.tar.gz
         chmod +x premake5
+        ./premake5 --version
     - name: Generate Makefiles
       run: |
         ./premake5 --gmcommon=garrysmod_common gmake2
