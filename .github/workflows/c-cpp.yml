@@ -43,7 +43,22 @@ jobs:
     - name: Build Linux x86_64
       run: |
         cd projects/linux/gmake
-        make config=releasewithsymbols
+        mapfile -t configs < <(sed -n 's/^ifneq ($(config),\(.*\))/\1/p' Makefile | sort -u)
+        printf 'Generated make configs:\n'
+        printf '  %s\n' "${configs[@]}"
+        config="$(printf '%s\n' "${configs[@]}" | grep -Ei 'releasewithsymbols.*(x86_64|x64|linux64|64)' | head -n 1 || true)"
+        if [ -z "$config" ]; then
+          config="$(printf '%s\n' "${configs[@]}" | grep -Ei 'release.*(x86_64|x64|linux64|64)' | head -n 1 || true)"
+        fi
+        if [ -z "$config" ]; then
+          config="$(printf '%s\n' "${configs[@]}" | grep -Ei 'releasewithsymbols' | head -n 1 || true)"
+        fi
+        if [ -z "$config" ]; then
+          printf 'No usable Linux x86_64 release config found.\n'
+          exit 1
+        fi
+        printf 'Building config: %s\n' "$config"
+        make "config=$config"
     - name: Verify Linux x86_64 module
       run: |
         MODULE_PATH="$(find projects/linux/gmake -name gmsv_eightbit_linux64.dll -type f | head -n 1)"
