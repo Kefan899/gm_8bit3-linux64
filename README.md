@@ -1,3 +1,5 @@
+# ORIGINAL 8BIT3 MODULE DESCRIPTION BELOW
+
 # gm_8bit
 A module for manipulating voice data in Garry's Mod.
 
@@ -58,7 +60,7 @@ Added many voice presets, reworked sv_broadcastdata. Fixed many bugs introduced 
 `eightbit.EFF_SLOWMOTION` Slows down the audio by repeating each sample, lowering pitch by about one octave. Gives a deep, stretched, “slow?motion” effect.
 
 `Eightbit.EFF_COMBO` is a hybrid of ring modulation, soft limiting, comb filtering, and bandpass filtering. Creates a "Metrocop" effect.
-
+-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------
 # Forked from "RG Studio" and "Quantum Ocean" projects
 
 ### Original module - https://github.com/fandax76/gm_8bit3
