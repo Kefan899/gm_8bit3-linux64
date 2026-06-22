@@ -23,14 +23,20 @@ CreateWorkspace({name = "eightbit"})
 		includedirs("opus/include")
 
 		filter({"platforms:x86_64"})
-			libdirs {"opus/lib64"}
+			architecture("x86_64")
+			if os.isdir("opus/lib64") then
+				libdirs("opus/lib64")
+			end
 
 		filter({"platforms:x86"})
-			libdirs {"opus/lib32"}
+			architecture("x86")
+			if os.isdir("opus/lib32") then
+				libdirs("opus/lib32")
+			end
 
 		filter("system:windows")
 			links("ws2_32")
 
 filter("system:linux")
-    links("dl")
+	links("dl")
 	
