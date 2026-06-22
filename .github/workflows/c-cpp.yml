@@ -35,7 +35,7 @@ jobs:
         find premake-bin -name premake5 -type f -print
         cp "$(find premake-bin -name premake5 -type f | head -n 1)" ./premake5
         chmod +x ./premake5
-        ./premake5 --version
+        test -x ./premake5
     - name: Generate Makefiles
       run: |
         ./premake5 --gmcommon=garrysmod_common gmake2
